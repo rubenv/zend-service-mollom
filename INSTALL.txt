@@ -1,0 +1,5 @@
+INSTALLATION
+------------
+
+Just drop the files in the library folder somewhere in your classpath. Should
+work as expected then.
