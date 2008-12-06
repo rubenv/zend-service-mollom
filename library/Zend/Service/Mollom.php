@@ -371,8 +371,8 @@ class Zend_Service_Mollom extends Zend_Service_Abstract
 
         // Add authentication data and prepare request
         $auth = $this->_getAuthenticationData();
-        $params = array_merge($params, $auth);
-        $request = new Zend_XmlRpc_Request($method, array($params));
+        $reqparams = array_merge($params, $auth);
+        $request = new Zend_XmlRpc_Request($method, array($reqparams));
 
         // Try each server
         foreach ($servers as $server) {
@@ -390,11 +390,10 @@ class Zend_Service_Mollom extends Zend_Service_Abstract
             $code = $fault->getCode();
 
             switch ($code) {
-                // Refresh server list and fall back to next server
+                // Refresh server list and restart the call.
                 case self::FAULT_REFRESH:
                     $this->_updateServerList();
-                    $servers = $this->getServers();
-                    break;
+                    return $this->_doCall($method, $params);
 
                 // Do nothing, next iteration will use next server
                 case self::FAULT_BUSY:
