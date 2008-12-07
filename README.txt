@@ -12,8 +12,15 @@ contributions before they are posted to participating websites.
 RELEASE INFORMATION
 -------------------
 
-Zend_Service_Mollom 1.0.0 for Zend Framework 1.6.1 and above
+Zend_Service_Mollom 1.1.0 for Zend Framework 1.6.1 and above
 Released on 2008-12-06
+
+Changes in this version:
+ - Fixed a bug where the REFRESH case wasn't handled correctly (thanks to 
+   Dries Buytaert for pointing out!)
+ - Add unit test coverage
+
+Full changelog below.
 
 SYSTEM REQUIREMENTS
 -------------------
@@ -49,3 +56,16 @@ More information can be found on his website: http://www.savanne.be/
 
 All questions, remarks & feedback are welcome, I am also available for
 contracting on PHP related projects.
+
+CHANGELOG
+---------
+
+07 Dec 2008 - 1.1.0:
+ - Second release, incorporating the feedback from the Mollom team. Should be 
+   ready for public consumption.
+ - Fixed a bug where the REFRESH case wasn't handled correctly (thanks to 
+   Dries Buytaert for pointing out!)
+ - Add unit test coverage
+
+06 Dec 2008 - 1.0.0:
+ - Initial release
