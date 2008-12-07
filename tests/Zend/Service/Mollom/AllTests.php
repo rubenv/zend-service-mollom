@@ -37,6 +37,9 @@ require_once 'PHPUnit/TextUI/TestRunner.php';
  */
 require_once 'Zend/Service/Mollom/GetServersTest.php';
 require_once 'Zend/Service/Mollom/CheckContentTest.php';
+require_once 'Zend/Service/Mollom/CheckCaptchaTest.php';
+require_once 'Zend/Service/Mollom/SendFeedbackTest.php';
+require_once 'Zend/Service/Mollom/VerifyKeyTest.php';
 
 class Zend_Service_Mollom_AllTests
 {
@@ -52,6 +55,9 @@ class Zend_Service_Mollom_AllTests
 
 		$suite->addTestSuite('Zend_Service_Mollom_GetServersTest');
 		$suite->addTestSuite('Zend_Service_Mollom_CheckContentTest');
+		$suite->addTestSuite('Zend_Service_Mollom_CheckCaptchaTest');
+		$suite->addTestSuite('Zend_Service_Mollom_SendFeedbackTest');
+		$suite->addTestSuite('Zend_Service_Mollom_VerifyKeyTest');
 
         return $suite;
     }
