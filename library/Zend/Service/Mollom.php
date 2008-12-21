@@ -54,6 +54,14 @@ require_once 'Zend/XmlRpc/Request.php';
  */
 class Zend_Service_Mollom extends Zend_Service_Abstract
 {
+    /**
+     * Internal cache for mollom servers.
+     * 
+     * @var Zend_Cache_Core
+     * @access private
+     */
+    private static $_cache = null;
+
     /** 
      * Hardcoded list of servers, from which the list of available servers
      * will be requested.
@@ -177,6 +185,60 @@ class Zend_Service_Mollom extends Zend_Service_Abstract
     }
 
     /**
+     * Returns the set cache
+     * 
+     * @return Zend_Cache_Core The set cache
+     */
+    public static function getCache()
+    {
+        return self::$_cache;
+    }
+
+    /**
+     * Set a cache for Zend_Service_Mollom
+     * 
+     * @param Zend_Cache_Core $cache A cache frontend
+     */
+    public static function setCache(Zend_Cache_Core $cache)
+    {
+        self::$_cache = $cache;
+    }
+
+    /**
+     * Returns true when a cache is set
+     *
+     * @return boolean
+     */
+    public static function hasCache()
+    {
+        if (self::$_cache !== null) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Removes any set cache
+     *
+     * @return void
+     */
+    public static function removeCache()
+    {
+        self::$_cache = null;
+    }
+
+    /**
+     * Clears all set cache data
+     *
+     * @return void
+     */
+    public static function clearCache()
+    {
+        self::$_cache->clean();
+    }
+
+    /**
      * Validate a captcha.
      *
      * @param string $session_id The ID of the solved captcha
@@ -264,6 +326,12 @@ class Zend_Service_Mollom extends Zend_Service_Abstract
     public function getServers()
     {
         if (count($this->_servers) == 0) {
+            if (isset(self::$_cache)) {
+                $id = 'Zend_Service_Mollom_'.$this->getPublicKey();
+                if ($result = self::$_cache->load($id)) {
+                    return unserialize($result);
+                }
+            }
             $this->_updateServerList();
         }
         return $this->_servers;
@@ -417,5 +485,9 @@ class Zend_Service_Mollom extends Zend_Service_Abstract
     private function _updateServerList()
     {
         $this->_servers = $this->_doCall('mollom.getServerList', array(), $this->_defaultServers);
+        if (isset(self::$_cache)) {
+            $id = 'Zend_Service_Mollom_'.$this->getPublicKey();
+            self::$_cache->save(serialize($this->_servers), $id);
+        }
     }
 }
