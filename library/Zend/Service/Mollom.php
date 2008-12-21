@@ -21,6 +21,11 @@
  */
 
 /**
+ * @see Zend_Cache_Core
+ */
+require_once 'Zend/Cache/Core.php';
+
+/**
  * @see Zend_Service_Abstract
  */
 require_once 'Zend/Service/Abstract.php';
