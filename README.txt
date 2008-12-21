@@ -12,13 +12,14 @@ contributions before they are posted to participating websites.
 RELEASE INFORMATION
 -------------------
 
-Zend_Service_Mollom 1.1.0 for Zend Framework 1.6.1 and above
-Released on 2008-12-06
+Zend_Service_Mollom 1.2.0 for Zend Framework 1.6.1 and above
+Released on 2008-12-21
 
 Changes in this version:
- - Fixed a bug where the REFRESH case wasn't handled correctly (thanks to 
-   Dries Buytaert for pointing out!)
- - Add unit test coverage
+ - Integrate caching code, to prevent a getServers roundtrip on every usage.
+   Improves performance.
+ - Add unit test coverage for the caching code
+ - This version will be proposed for inclusion in Zend Framework 1.8
 
 Full changelog below.
 
@@ -59,6 +60,12 @@ contracting on PHP related projects.
 
 CHANGELOG
 ---------
+
+21 Dec 2008 - 1.2.0:
+ - Integrate caching code, to prevent a getServers roundtrip on every usage.
+   Improves performance.
+ - Add unit test coverage for the caching code
+ - This version will be proposed for inclusion in Zend Framework 1.8
 
 07 Dec 2008 - 1.1.0:
  - Second release, incorporating the feedback from the Mollom team. Should be 
